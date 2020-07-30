@@ -27,83 +27,45 @@ import {
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-const Stack = createStackNavigator();
-const MyStack = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: 'Welcome' }}
-        />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
-const HomeScreen = ({ navigation }) => {
-  return (
-    <Button
-      title="Go to Jane's profile"
-      onPress={() =>
-        navigation.navigate('Profile', { name: 'Jane' })
-      }
-    />
-  );
-};
-const ProfileScreen = () => {
-  return <Text>This is Jane's profile</Text>;
-};
 
+import { Router, Stack, Scene, Tabs } from 'react-native-router-flux';
+import TabView from './components/TabViewDemo'
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step 222</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
+const App = () => (
+  <Router>
+    <Stack key="root">
+      <Tabs
+        key="tabbar"
+        routeName="tabbar">
+        <Stack
+          key="tab_1"
+          title="Tab #1"
+          tabBarLabel="TAB #1">
+          <Scene
+            key="tab_1_1"
+            component={TabView}
+            title="Tab #1_1"
+          />
+        </Stack>
+
+        <Stack key="tab_2" title="Tab #2" initial>
+          <Scene
+            key="tab_2_1"
+            component={TabView}
+            title="Tab #2_1"
+          />
+        </Stack>
+
+        <Stack key="tab_3" title="Tab #3">
+          <Scene
+            key="tab_3_1"
+            component={TabView}
+          />
+        </Stack>
+      </Tabs>
+    </Stack>
+  </Router>
+);
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -144,4 +106,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyStack;
+export default App;
