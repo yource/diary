@@ -29,7 +29,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Router, Stack, Scene, Tabs } from 'react-native-router-flux';
-import TabView from './components/TabViewDemo'
+
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const App = () => (
   <Router>
@@ -66,6 +67,19 @@ const App = () => (
     </Stack>
   </Router>
 );
+
+
+class TabView extends React.Component{
+  render(){
+      return(
+          <View>
+              <Text>This is tab view</Text>
+              <Icon name="add-circle-outline" size={90} color="green"></Icon>
+              <Icon name="add-circle" size={90} color="blue"></Icon>
+          </View>
+      )
+  }
+}
 
 const styles = StyleSheet.create({
   scrollView: {
